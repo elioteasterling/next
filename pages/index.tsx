@@ -11,7 +11,7 @@ export default function Home() {
 
       <main>
         <h1 className={styles.title}>
-          Go to the <a href="posts/">other </a>
+          Go to the <a href="posts/">Posts Page</a>
         </h1>
       </main>
     </div>
