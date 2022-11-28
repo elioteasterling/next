@@ -1,0 +1,17 @@
+schema: http://localhost:3000/graphql
+documents: ./src/graphql/*.graphql
+generates:
+ graphql/generated.ts:
+  plugins:
+    - typescript-operations
+    - typescript-resolvers
+config:
+ mappers:
+  User: .prisma/client#User as UserDb
+  Roll: .prisma/client#Roll as RollDb
+  Song: .prisma/client#Song as SongDb
+  Invitation: .prisma/client#Invitation as InvitationDb
+  inputMaybeValue: undefined | T
+
+# must make a mapper foreach db entity type (e.g., User => userDb)
+#

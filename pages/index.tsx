@@ -1,19 +1,16 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Awesome Links</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className={styles.title}>
-          Go to the <a href="posts/">Posts Page</a>
-        </h1>
-      </main>
+      <div className="container mx-auto max-w-5xl my-20">
+        What up dog?
+      </div>
     </div>
-  )
+  );
 }

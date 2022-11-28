@@ -1,0 +1,50 @@
+// npx prisma db push => create the tables in the database
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// ---------------------- DON'T CHANGE vv -------------------------------------
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+// ---------------------- DON'T CHANGE  ^^ ------------------------------------
+
+// ---------------------- Database entities vv --------------------------------
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  image       String?
+  role        Role         @default(USER)
+  songs       Song[] //  (m-n) => User's Songs
+  invitations Invitation[] @relation("invitations")
+  inviters    Invitation[] @relation("invitees")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Invitation {
+  id        String @id @default(uuid())
+  inviter   User?  @relation(fields: [inviterId], references: [id], name: "invitations")
+  inviterId String 
+  invitee   User   @relation(fields: [inviteeId], references: [id], name: "invitees")
+  inviteeId String
+}
+
+model Song {
+  id          Int      @id @default(autoincrement())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String
+  url         String
+  imageUrl    String
+  category    String
+  users       User[] // (m-n) => Songs's Users
+}
+
+// ---------------------- Database entities ^^ --------------------------------
