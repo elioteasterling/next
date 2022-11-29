@@ -7,7 +7,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import { prisma } from '../client'
 
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
-export default authHandler;
+export default authHandler
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -21,10 +21,10 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token, user }) {
       if (session && session.user) {
-        (session.user as any).role = (user as any).role;
-        (session.user as any).id = (user as any).id;
+        session.user.name = user.name
+        session.user.image =   user.image
       } 
-      return session;
+      return session
     }
   },
 };
